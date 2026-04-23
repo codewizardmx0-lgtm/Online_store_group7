@@ -1,0 +1,329 @@
+@startuml
+hide circle
+skinparam linetype ortho
+skinparam nodesep 60
+skinparam ranksep 60
+skinparam EntityBackgroundColor #F9F9F9
+skinparam EntityBorderColor #333333
+skinparam defaultFontName Arial
+
+' ==========================================
+' 1. User Management (إدارة المستخدمين)
+' ==========================================
+entity "Users" {
+  * user_id : int <<PK>>
+  --
+  full_name : string
+  email : string <<UK>>
+  password_hash : string
+  role : enum(admin, customer)
+  created_at : timestamp
+}
+
+entity "Addresses" {
+  * address_id : int <<PK>>
+  --
+  user_id : int <<FK>>
+  city : string
+  street : string
+  details : text <<Nullable>>
+  phone_number : string
+  postal_code : string <<Nullable>>
+  is_default : boolean <<Default False>>
+}
+
+' ==========================================
+' 2. Catalog & Attributes (كتالوج المنتجات والخصائص)
+' ==========================================
+entity "Categories" {
+  * category_id : int <<PK>>
+  --
+  name : string
+  parent_id : int <<FK, Nullable>>
+}
+
+entity "Products" {
+  * product_id : int <<PK>>
+  --
+  category_id : int <<FK, Index>>
+  name : string
+  base_price : decimal(10,2)
+  status : enum(active, hidden, out_of_stock)
+  created_at : timestamp
+}
+
+entity "Product_Images" {
+  * image_id : int <<PK>>
+  --
+  product_id : int <<FK>>
+  image_url : string
+  sort_order : int
+}
+
+entity "Attributes" {
+  * attribute_id : int <<PK>>
+  --
+  name : string
+  type : enum(text, number, select)
+  is_required : boolean
+}
+
+entity "Attribute_Options" {
+  * option_id : int <<PK>>
+  --
+  attribute_id : int <<FK>>
+  value : string
+}
+
+entity "Category_Attributes" {
+  * id : int <<PK>>
+  --
+  category_id : int <<FK>>
+  attribute_id : int <<FK>>
+}
+
+' ==========================================
+' 3. Advanced Inventory (المخزون المتقدم)
+' ==========================================
+entity "Inventory" {
+  * inventory_id : int <<PK>>
+  --
+  product_id : int <<FK, Index>>
+  sku : string <<UK>>
+  quantity : int <<CHECK (quantity >= 0)>>
+  price_adjustment : decimal(10,2) <<Default 0>>
+  __
+  {Index} (product_id, quantity)
+}
+
+entity "Inventory_Attribute_Values" {
+  * id : int <<PK>>
+  --
+  inventory_id : int <<FK>>
+  option_id : int <<FK, Index>>
+  __
+  {Unique} (inventory_id, option_id)
+}
+
+' ==========================================
+' 4. Cart, Orders & Coupons (السلة، الطلبات والكوبونات)
+' ==========================================
+entity "Carts" {
+  * cart_id : int <<PK>>
+  --
+  user_id : int <<FK, Nullable>>
+  session_id : string <<Nullable, UK>>
+  updated_at : timestamp
+}
+
+entity "Cart_Items" {
+  * cart_item_id : int <<PK>>
+  --
+  cart_id : int <<FK>>
+  inventory_id : int <<FK>>
+  quantity : int
+  price_snapshot : decimal(10,2)
+  selected_options_snapshot : json <<Nullable>>
+  __
+  {Unique} (cart_id, inventory_id)
+}
+
+entity "Coupons" {
+  * coupon_id : int <<PK>>
+  --
+  code : string <<UK>>
+  discount_type : enum(percentage, fixed)
+  discount_value : decimal(10,2)
+  min_order : decimal(10,2) <<Nullable>>
+  expires_at : date
+  usage_limit : int <<Nullable>>
+  per_user_limit : int <<Default 1>>
+}
+
+entity "Coupon_Usages" {
+  * id : int <<PK>>
+  --
+  coupon_id : int <<FK>>
+  user_id : int <<FK>>
+  order_id : int <<FK>>
+  __
+  {Unique} (coupon_id, user_id, order_id)
+}
+
+entity "Orders" {
+  * order_id : int <<PK>>
+  --
+  user_id : int <<FK, Index>>
+  address_id : int <<FK>>
+  coupon_id : int <<FK, Nullable>>
+  subtotal : decimal(10,2)
+  discount_amount : decimal(10,2)
+  tax_amount : decimal(10,2)
+  shipping_fee : decimal(10,2)
+  total_amount : decimal(10,2)
+  currency_code : string <<Default 'SAR'>>
+  payment_method : enum(cod, card, etc.)
+  payment_transaction_id : string <<Nullable>>
+  current_status : enum(pending, paid, shipped, etc.)
+  created_at : timestamp
+  __
+  {Index} (user_id, created_at)
+}
+
+entity "Order_Status_History" {
+  * history_id : int <<PK>>
+  --
+  order_id : int <<FK>>
+  status : enum
+  changed_by : int <<FK, Nullable>>
+  changed_at : timestamp
+}
+
+entity "Order_Items" {
+  * order_item_id : int <<PK>>
+  --
+  order_id : int <<FK, Index>>
+  inventory_id : int <<FK, Nullable>>
+  quantity : int
+  price_at_purchase : decimal(10,2)
+  product_name_snapshot : string
+  sku_snapshot : string
+  selected_options_snapshot : json
+}
+
+' ==========================================
+' 5. Operations & Customer Service (العمليات وخدمة العملاء)
+' ==========================================
+entity "Return_Requests" {
+  * return_id : int <<PK>>
+  --
+  order_item_id : int <<FK>>
+  user_id : int <<FK>>
+  status : enum(pending, approved, rejected, completed)
+  reason : text
+  created_at : timestamp
+}
+
+entity "Reviews" {
+  * review_id : int <<PK>>
+  --
+  user_id : int <<FK>>
+  order_item_id : int <<FK>>
+  rating : tinyint(1-5)
+  comment : text <<Nullable>>
+  created_at : timestamp
+  __
+  {Unique} (user_id, order_item_id)
+}
+
+entity "Wishlists" {
+  * wishlist_id : int <<PK>>
+  --
+  user_id : int <<FK>>
+  product_id : int <<FK>>
+  added_from : enum(web, mobile)
+  created_at : timestamp
+  __
+  {Unique} (user_id, product_id)
+}
+
+' ==========================================
+' 6. System & Admin (النظام والإدارة)
+' ==========================================
+entity "Inventory_Locks" {
+  * lock_id : int <<PK>>
+  --
+  inventory_id : int <<FK>>
+  user_id : int <<FK, Nullable>>
+  session_id : string <<Nullable>>
+  locked_at : timestamp
+  expires_at : timestamp
+  __
+  {Index} (inventory_id, expires_at)
+}
+
+entity "Audit_Logs" {
+  * log_id : int <<PK>>
+  --
+  user_id : int <<FK, Nullable>>
+  action : string
+  entity_type : string
+  entity_id : int
+  status : enum(success, failed)
+  ip_address : string
+  user_agent : string
+  details : json <<Nullable>>
+  created_at : timestamp
+  __
+  {Index} (entity_type, entity_id)
+}
+
+entity "Notifications" {
+  * notification_id : int <<PK>>
+  --
+  user_id : int <<FK>>
+  type : enum(order, system, promotion)
+  reference_id : int <<Nullable>>
+  title : string
+  message : text
+  is_sent : boolean
+  is_read : boolean <<Default False>>
+  created_at : timestamp
+  __
+  {Index} (user_id, is_read)
+}
+
+entity "Store_Settings" {
+  * setting_id : int <<PK>>
+  --
+  setting_key : string <<UK>>
+  type : enum(string, number, json, boolean)
+  setting_value : text
+  __
+  note : "Cache via Redis in App"
+}
+
+' ==========================================
+' العلاقات (Relationships)
+' ==========================================
+Users ||--o{ Addresses : "has"
+Users ||--o{ Carts : "owns"
+Users ||--o{ Orders : "places"
+Users ||--o{ Reviews : "writes"
+Users ||--o{ Return_Requests : "requests"
+Users ||--o{ Wishlists : "adds_to"
+Users ||--o{ Audit_Logs : "triggers"
+Users ||--o{ Notifications : "receives"
+Users ||--o{ Coupon_Usages : "uses"
+
+Categories |o--o{ Categories : "parent_of"
+Categories ||--o{ Products : "contains"
+Categories ||--o{ Category_Attributes : "has"
+
+Attributes ||--o{ Category_Attributes : "assigned_to"
+Attributes ||--o{ Attribute_Options : "has_options"
+
+Products ||--o{ Product_Images : "has_images"
+Products ||--o{ Inventory : "has_stock"
+Products ||--o{ Wishlists : "added_in"
+
+Inventory ||--o{ Inventory_Attribute_Values : "has_attributes"
+Attribute_Options ||--o{ Inventory_Attribute_Values : "used_in"
+
+Inventory ||--o{ Cart_Items : "added_to"
+Inventory ||--o{ Order_Items : "bought_as"
+Inventory ||--o{ Inventory_Locks : "locked_in"
+
+Carts ||--|{ Cart_Items : "contains"
+
+Orders ||--|{ Order_Items : "contains"
+Orders ||--o{ Order_Status_History : "has_history"
+Orders ||--o{ Coupon_Usages : "uses"
+
+Coupons ||--o{ Orders : "applied_to"
+Coupons ||--o{ Coupon_Usages : "tracked_by"
+
+Order_Items ||--o| Reviews : "reviewed_in"
+Order_Items ||--o{ Return_Requests : "returned_in"
+
+@enduml
