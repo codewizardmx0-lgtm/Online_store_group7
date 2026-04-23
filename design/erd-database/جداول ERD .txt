@@ -1,0 +1,214 @@
+
+### 👤 أولاً: إدارة المستخدمين (User Management)
+**1. جدول المستخدمين (Users)**
+- **user_id**: PK
+- **full_name**: string
+- **email**: string *(Unique)*
+- **password_hash**: string
+- **role**: enum(admin, customer)
+- **created_at**: timestamp
+
+**2. جدول العناوين (Addresses)**
+- **address_id**: PK
+- **user_id**: FK → Users
+- **city**: string
+- **street**: string
+- **details**: text (Nullable)
+- **phone_number**: string *(للتواصل عند التوصيل)*
+- **postal_code**: string (Nullable)
+- **is_default**: boolean *(Default False - لتحديد العنوان الرئيسي)*
+
+***
+
+### 📦 ثانياً: كتالوج المنتجات والخصائص (Catalog & Attributes)
+**3. جدول التصنيفات (Categories)**
+- **category_id**: PK
+- **name**: string
+- **parent_id**: FK → Categories (Nullable)
+
+**4. جدول المنتجات (Products)**
+- **product_id**: PK
+- **category_id**: FK → Categories *(Index)*
+- **name**: string
+- **base_price**: decimal(10,2)
+- **status**: enum(active, hidden, out_of_stock)
+- **created_at**: timestamp
+
+**5. جدول صور المنتجات (Product_Images)**
+- **image_id**: PK
+- **product_id**: FK → Products
+- **image_url**: string
+- **sort_order**: integer 
+
+**6. جدول الخصائص الأساسية (Attributes)**
+- **attribute_id**: PK
+- **name**: string 
+- **type**: enum(text, number, select)
+- **is_required**: boolean
+
+**7. جدول خيارات الخصائص (Attribute_Options)**
+- **option_id**: PK
+- **attribute_id**: FK → Attributes
+- **value**: string
+
+**8. جدول ربط الخصائص بالتصنيفات (Category_Attributes)**
+- **id**: PK
+- **category_id**: FK → Categories
+- **attribute_id**: FK → Attributes
+
+***
+
+### 🗄️ ثالثاً: المخزون المتقدم (Advanced Inventory)
+**9. جدول المخزون (Inventory)**
+- **inventory_id**: PK
+- **product_id**: FK → Products *(Index)*
+- **sku**: string *(Unique)*
+- **quantity**: integer *(Constraint: CHECK (quantity >= 0) لمنع المخزون السالب)*
+- **price_adjustment**: decimal(10,2) (Default 0)
+
+**10. جدول تفاصيل تركيبة المخزون (Inventory_Attribute_Values)**
+- **id**: PK
+- **inventory_id**: FK → Inventory
+- **option_id**: FK → Attribute_Options *(Index)*
+- *(Unique Constraint: `(inventory_id, option_id)` لمنع تكرار نفس الخيار للنسخة الواحدة)*
+
+***
+
+### 🛒 رابعاً: السلة، الطلبات، والكوبونات (Cart, Orders & Coupons)
+**11. جدول سلة التسوق (Carts)**
+- **cart_id**: PK
+- **user_id**: FK → Users (Nullable)
+- **session_id**: string (Nullable, Unique)
+- **updated_at**: timestamp
+
+**12. جدول عناصر السلة (Cart_Items)**
+- **cart_item_id**: PK
+- **cart_id**: FK → Carts
+- **inventory_id**: FK → Inventory
+- **quantity**: integer
+- **price_snapshot**: decimal(10,2)
+- **selected_options_snapshot**: json (Nullable)
+- *(Unique/Index Constraint: `(cart_id, inventory_id)` لمنع تكرار إضافة نفس المنتج للسلة كعنصرين منفصلين، بل يتم زيادة الـ Quantity)*
+
+**13. جدول الكوبونات (Coupons)**
+- **coupon_id**: PK
+- **code**: string *(Unique)*
+- **discount_type**: enum(percentage, fixed)
+- **discount_value**: decimal(10,2)
+- **min_order**: decimal(10,2) (Nullable)
+- **expires_at**: date
+- **usage_limit**: integer (Nullable)
+- **per_user_limit**: integer (Default 1)
+
+**14. جدول تتبع استخدام الكوبونات (Coupon_Usages)**
+- **id**: PK
+- **coupon_id**: FK → Coupons
+- **user_id**: FK → Users
+- **order_id**: FK → Orders
+- *(Unique Constraint: `(coupon_id, user_id, order_id)` لمنع تكرار تسجيل الاستخدام)*
+
+**15. جدول الطلبات (Orders)**
+- **order_id**: PK
+- **user_id**: FK → Users *(Index)*
+- **address_id**: FK → Addresses
+- **coupon_id**: FK → Coupons (Nullable)
+- **subtotal**: decimal(10,2)
+- **discount_amount**: decimal(10,2)
+- **tax_amount**: decimal(10,2)
+- **shipping_fee**: decimal(10,2)
+- **total_amount**: decimal(10,2)
+- **currency_code**: string (Default 'SAR')
+- **payment_method**: enum(cod, credit_card, etc.)
+- **payment_transaction_id**: string (Nullable)
+- **current_status**: enum(pending, paid, processing, shipped, delivered, cancelled, refunded)
+- **created_at**: timestamp
+- *(Index: `user_id, created_at`)*
+
+**16. جدول تاريخ حالات الطلب (Order_Status_History)**
+- **history_id**: PK
+- **order_id**: FK → Orders
+- **status**: enum
+- **changed_by**: FK → Users (Nullable)
+- **changed_at**: timestamp
+
+**17. جدول تفاصيل الطلب (Order_Items)**
+- **order_item_id**: PK
+- **order_id**: FK → Orders *(Index)*
+- **inventory_id**: FK → Inventory (Nullable)
+- **quantity**: integer
+- **price_at_purchase**: decimal(10,2)
+- **product_name_snapshot**: string 
+- **sku_snapshot**: string 
+- **selected_options_snapshot**: json 
+
+***
+
+### 🔄 خامساً: خدمة العملاء والعمليات (Operations)
+**18. جدول المرتجعات (Return_Requests)**
+- **return_id**: PK
+- **order_item_id**: FK → Order_Items
+- **user_id**: FK → Users
+- **status**: enum(pending, approved, rejected, completed)
+- **reason**: text
+- **created_at**: timestamp
+
+**19. جدول التقييمات (Reviews)**
+- **review_id**: PK
+- **user_id**: FK → Users
+- **order_item_id**: FK → Order_Items
+- **rating**: tinyint(1)
+- **comment**: text (Nullable)
+- **created_at**: timestamp
+- *(Unique Constraint: `(user_id, order_item_id)` لمنع تقييم نفس الشروة مرتين)*
+
+**20. جدول المفضلة (Wishlists)**
+- **wishlist_id**: PK
+- **user_id**: FK → Users
+- **product_id**: FK → Products
+- **added_from**: enum(web, mobile)
+- **created_at**: timestamp
+- *(Unique Constraint: `(user_id, product_id)`)*
+
+***
+
+### ⚙️ سادساً: النظام والإدارة (System & Admin)
+**21. جدول أقفال المخزون (Inventory_Locks)**
+- **lock_id**: PK
+- **inventory_id**: FK → Inventory
+- **user_id**: FK → Users (Nullable)
+- **session_id**: string (Nullable)
+- **locked_at**: timestamp
+- **expires_at**: timestamp
+- *(Index: `inventory_id, expires_at`)*
+
+**22. جدول سجلات التدقيق (Audit_Logs)**
+- **log_id**: PK
+- **user_id**: FK → Users (Nullable)
+- **action**: string
+- **entity_type**: string
+- **entity_id**: integer
+- **status**: enum(success, failed)
+- **ip_address**: string
+- **user_agent**: string
+- **details**: json (Nullable)
+- **created_at**: timestamp
+- *(Index: `entity_type, entity_id`)*
+
+**23. جدول الإشعارات (Notifications)**
+- **notification_id**: PK
+- **user_id**: FK → Users
+- **type**: enum(order, system, promotion)
+- **reference_id**: integer (Nullable)
+- **title**: string
+- **message**: text
+- **is_sent**: boolean 
+- **is_read**: boolean (Default: False)
+- **created_at**: timestamp
+- *(Index: `user_id, is_read` - لسرعة جلب الإشعارات غير المقروءة)*
+
+**24. جدول إعدادات المتجر (Store_Settings)**
+- **setting_id**: PK
+- **setting_key**: string *(Unique)*
+- **type**: enum(string, number, json, boolean) 
+- **setting_value**: text 
+*(📌 ملاحظة أدائية: يجب قراءة هذا الجدول في طبقة التطبيق (Application Layer) من Redis أو كـ In-Memory Cache وتحديثه فقط عند التعديل، بدلاً من الاستعلام عنه مع كل طلبية).*
