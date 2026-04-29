@@ -1,0 +1,74 @@
+Folder PATH listing for volume student
+Volume serial number is 24B5-7DEF
+S:.
+|   .gitignore
+|   eslint.config.js
+|   index.html
+|   package-lock.json
+|   package.json
+|   postcss.config.js
+|   README.md
+|   structure.txt
+|   tailwind.config.js
+|   vite.config.js
+|   
++---public
+|       apple-icon.png
+|       favicon.svg
+|       icon-dark-32x32.png
+|       icon-light-32x32.png
+|       icon.svg
+|       icons.svg
+|       placeholder-logo.png
+|       placeholder-logo.svg
+|       placeholder-user.jpg
+|       placeholder.jpg
+|       placeholder.svg
+|       
++---src
+|   |   App.jsx
+|   |   index.css
+|   |   main.jsx
+|   |   
+|   +---assets
+|   |       hero.png
+|   |       react.svg
+|   |       vite.svg
+|   |       
+|   +---components
+|   |   \---ui
+|   |           Badge.jsx
+|   |           Button.jsx
+|   |           index.js
+|   |           Input.jsx
+|   |           Modal.jsx
+|   |           ProductCard.jsx
+|   |           RatingStars.jsx
+|   |           Select.jsx
+|   |           SkeletonLoader.jsx
+|   |           StatCard.jsx
+|   |           Table.jsx
+|   |           
+|   +---layouts
+|   |       AdminLayout.jsx
+|   |       CustomerLayout.jsx
+|   |       
+|   +---lib
+|   |       mockData.js
+|   |       utils.js
+|   |       
+|   \---pages
+|       |   Cart.jsx
+|       |   Checkout.jsx
+|       |   Home.jsx
+|       |   Product.jsx
+|       |   Shop.jsx
+|       |   
+|       \---admin
+|               Customers.jsx
+|               Dashboard.jsx
+|               Orders.jsx
+|               Products.jsx
+|               Settings.jsx
+|         
+        
