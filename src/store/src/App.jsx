@@ -20,6 +20,7 @@ import AdminOrders from "@/pages/admin/Orders";
 import AdminCustomers from "@/pages/admin/Customers";
 import AdminSettings from "@/pages/admin/Settings";
 
+
 export default function App() {
   return (
     <BrowserRouter>
