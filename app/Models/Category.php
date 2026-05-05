@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory; // 👈 أضفنا هذا
 
 class Category extends Model
-{
+{    
+    use HasFactory; // 👈 أضفنا هذا
     protected $primaryKey = 'category_id';
     public $timestamps = false;
 
