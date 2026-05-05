@@ -8,8 +8,8 @@ import {
     HeadphonesIcon,
 } from "lucide-react";
 import { useStore } from "@/context/StoreContext";
-import Button from "@/components/ui/Button";
-import ProductCard from "@/components/ui/ProductCard";
+import Button from "@/Components/ui/Button";
+import ProductCard from "@/Components/ui/ProductCard";
 
 function Hero() {
     return (

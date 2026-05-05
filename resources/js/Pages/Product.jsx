@@ -18,10 +18,10 @@ import { cn, formatCurrency } from "@/lib/utils";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useToast } from "@/context/ToastContext";
-import Button from "@/components/ui/Button";
-import RatingStars from "@/components/ui/RatingStars";
-import ProductCard from "@/components/ui/ProductCard";
-import Badge from "@/components/ui/Badge";
+import Button from "@/Components/ui/Button";
+import RatingStars from "@/Components/ui/RatingStars";
+import ProductCard from "@/Components/ui/ProductCard";
+import Badge from "@/Components/ui/Badge";
 
 export default function Product({ id }) {
     const { products } = useStore();

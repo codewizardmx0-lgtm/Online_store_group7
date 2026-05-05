@@ -4,9 +4,9 @@ import { SlidersHorizontal, Grid, List, X, Search } from "lucide-react";
 import { usePage } from "@inertiajs/react";
 import { useStore } from "@/context/StoreContext";
 import { cn } from "@/lib/utils";
-import Button from "@/components/ui/Button";
-import ProductCard from "@/components/ui/ProductCard";
-import Select from "@/components/ui/Select";
+import Button from "@/Components/ui/Button";
+import ProductCard from "@/Components/ui/ProductCard";
+import Select from "@/Components/ui/Select";
 
 const sortOptions = [
     { value: "featured", label: "Featured" },
