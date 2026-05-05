@@ -35,7 +35,7 @@ S:.
 |   |       react.svg
 |   |       vite.svg
 |   |       
-|   +---Components
+|   +---components
 |   |   \---ui
 |   |           Badge.jsx
 |   |           Button.jsx

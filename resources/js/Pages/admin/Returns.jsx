@@ -2,7 +2,7 @@
 import { RotateCcw, Check, X } from "lucide-react";
 import { useStore } from "@/context/StoreContext";
 import { useToast } from "@/context/ToastContext";
-import Badge from "@/Components/ui/Badge";
+import Badge from "@/components/ui/Badge";
 
 const STATUS_COLORS = {
     pending: "warning",

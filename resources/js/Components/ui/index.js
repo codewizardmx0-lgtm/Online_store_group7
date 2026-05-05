@@ -1,4 +1,4 @@
-// src/Components/ui/index.js
+// src/components/ui/index.js
 export { default as Button } from "./Button";
 export { default as Input } from "./Input";
 export { default as Select } from "./Select";

@@ -6,7 +6,7 @@ import { useWishlist } from "@/context/WishlistContext";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/context/ToastContext";
 import { products } from "@/lib/mockData";
-import Button from "@/Components/ui/Button";
+import Button from "@/components/ui/Button";
 
 export default function Wishlist() {
     const { wishlist, removeFromWishlist } = useWishlist();

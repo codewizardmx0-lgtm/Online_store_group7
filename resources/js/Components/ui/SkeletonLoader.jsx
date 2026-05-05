@@ -1,4 +1,4 @@
-// src/Components/ui/SkeletonLoader.jsx
+// src/components/ui/SkeletonLoader.jsx
 import { cn } from "@/lib/utils";
 
 export default function SkeletonLoader({ className, variant = "rectangle" }) {

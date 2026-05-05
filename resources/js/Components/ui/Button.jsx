@@ -1,4 +1,4 @@
-// src/Components/ui/Button.jsx
+// src/components/ui/Button.jsx
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 

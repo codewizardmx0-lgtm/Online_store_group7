@@ -1,4 +1,4 @@
-// src/Components/ui/ProductCard.jsx
+// src/components/ui/ProductCard.jsx
 import { useState } from "react";
 import { Link } from "@inertiajs/react";
 import { ShoppingCart, Heart, Check } from "lucide-react";

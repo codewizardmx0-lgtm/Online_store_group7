@@ -1,6 +1,6 @@
 /* src/app.css */
 @tailwind base;
-@tailwind Components;
+@tailwind components;
 @tailwind utilities;
 
 * {

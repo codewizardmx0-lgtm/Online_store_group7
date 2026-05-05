@@ -1,4 +1,4 @@
-// src/Components/ui/Input.jsx
+// src/components/ui/Input.jsx
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 

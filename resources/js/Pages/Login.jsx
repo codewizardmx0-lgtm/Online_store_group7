@@ -5,8 +5,8 @@ import { useEffect } from "react";
 import { Mail, Eye, EyeOff, LogIn } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/context/ToastContext";
-import Button from "@/Components/ui/Button";
-import Input from "@/Components/ui/Input";
+import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
 
 export default function Login() {
     const { login, isLoggedIn, isAdmin } = useAuth();

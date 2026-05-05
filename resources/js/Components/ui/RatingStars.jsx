@@ -1,4 +1,4 @@
-// src/Components/ui/RatingStars.jsx
+// src/components/ui/RatingStars.jsx
 import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 

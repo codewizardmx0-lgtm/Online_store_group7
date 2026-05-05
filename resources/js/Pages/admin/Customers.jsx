@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { customers } from "@/lib/mockData";
 import { formatCurrency, formatDate } from "@/lib/utils";
-import Button from "@/Components/ui/Button";
+import Button from "@/components/ui/Button";
 import {
     Table,
     TableHeader,
@@ -19,7 +19,7 @@ import {
     TableRow,
     TableHead,
     TableCell,
-} from "@/Components/ui/Table";
+} from "@/components/ui/Table";
 
 function CustomerActions({ customer }) {
     const [dropdownOpen, setDropdownOpen] = useState(false);

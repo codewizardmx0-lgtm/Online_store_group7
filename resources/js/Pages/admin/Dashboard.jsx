@@ -11,7 +11,7 @@ import { Link } from "@inertiajs/react";
 import { useStore } from "@/context/StoreContext";
 import { useAuth } from "@/context/AuthContext";
 import { formatCurrency } from "@/lib/utils";
-import Badge from "@/Components/ui/Badge";
+import Badge from "@/components/ui/Badge";
 
 const STATUS_COLORS = {
     pending: "warning",

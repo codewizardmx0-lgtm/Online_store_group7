@@ -2,8 +2,8 @@
 import { usePage, Link } from "@inertiajs/react";
 import { Search as SearchIcon, PackageX } from "lucide-react";
 import { useStore } from "@/context/StoreContext";
-import ProductCard from "@/Components/ui/ProductCard";
-import Button from "@/Components/ui/Button";
+import ProductCard from "@/components/ui/ProductCard";
+import Button from "@/components/ui/Button";
 
 export default function SearchPage() {
     const { products } = useStore();

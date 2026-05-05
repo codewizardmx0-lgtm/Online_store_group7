@@ -15,8 +15,8 @@ import { useCart } from "@/context/CartContext";
 import { useStore } from "@/context/StoreContext";
 import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/context/ToastContext";
-import Button from "@/Components/ui/Button";
-import Input from "@/Components/ui/Input";
+import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
 
 function validateStep1(d) {
     const e = {};

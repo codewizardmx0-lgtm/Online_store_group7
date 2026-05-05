@@ -1,4 +1,4 @@
-// src/Components/ui/Table.jsx
+// src/components/ui/Table.jsx
 import { cn } from "@/lib/utils";
 
 export function Table({ className, children }) {

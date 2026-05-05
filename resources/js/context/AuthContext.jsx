@@ -46,7 +46,7 @@ export function AuthProvider({ children, initialUser }) {
         // Priority 1: Laravel Auth (Inertia) – passed from props
         if (initialUser) return initialUser;
 
-        // Priority 2: Local Storage (Fallback for legacy Components)
+        // Priority 2: Local Storage (Fallback for legacy components)
         try {
             const s = localStorage.getItem("auth_user");
             return s ? JSON.parse(s) : null;

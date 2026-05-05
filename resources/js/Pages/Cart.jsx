@@ -5,7 +5,7 @@ import { Minus, Plus, X, ShoppingBag, ArrowRight, Tag } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/context/ToastContext";
 import { formatCurrency } from "@/lib/utils";
-import Button from "@/Components/ui/Button";
+import Button from "@/components/ui/Button";
 
 function CartItem({ item, onIncrease, onDecrease, onRemove }) {
     return (

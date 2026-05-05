@@ -3,8 +3,8 @@ import { useState } from "react";
 import { Plus, Pencil, Trash2, X, Check, BookOpen } from "lucide-react";
 import { useStore } from "@/context/StoreContext";
 import { useToast } from "@/context/ToastContext";
-import Button from "@/Components/ui/Button";
-import Input from "@/Components/ui/Input";
+import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
 
 function CatalogForm({ initial = {}, onSave, onCancel }) {
     const [form, setForm] = useState({

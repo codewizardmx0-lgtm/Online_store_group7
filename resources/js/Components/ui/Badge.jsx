@@ -1,4 +1,4 @@
-// src/Components/ui/Badge.jsx
+// src/components/ui/Badge.jsx
 import { cn } from "@/lib/utils";
 
 const badgeVariants = {

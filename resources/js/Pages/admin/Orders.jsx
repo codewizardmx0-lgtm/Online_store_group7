@@ -4,7 +4,7 @@ import { ShoppingCart, ChevronDown, ChevronUp } from "lucide-react";
 import { useStore } from "@/context/StoreContext";
 import { useToast } from "@/context/ToastContext";
 import { formatCurrency } from "@/lib/utils";
-import Badge from "@/Components/ui/Badge";
+import Badge from "@/components/ui/Badge";
 
 const STATUS_COLORS = {
     pending: "warning",

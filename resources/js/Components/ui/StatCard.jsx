@@ -1,4 +1,4 @@
-// src/Components/ui/StatCard.jsx
+// src/components/ui/StatCard.jsx
 import { TrendingUp, TrendingDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 

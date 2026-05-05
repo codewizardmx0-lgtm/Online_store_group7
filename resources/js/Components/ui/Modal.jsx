@@ -1,4 +1,4 @@
-// src/Components/ui/Modal.jsx
+// src/components/ui/Modal.jsx
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 

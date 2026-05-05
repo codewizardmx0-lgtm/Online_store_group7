@@ -1,7 +1,7 @@
 // src/pages/NotFound.jsx
 import { Link } from "@inertiajs/react";
 import { ArrowRight, MapPin } from "lucide-react";
-import Button from "@/Components/ui/Button";
+import Button from "@/components/ui/Button";
 
 export default function NotFound() {
     return (

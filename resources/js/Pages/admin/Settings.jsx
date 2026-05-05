@@ -2,8 +2,8 @@
 import { useState } from "react";
 import { Store, Bell, CreditCard, Shield, Globe, Save } from "lucide-react";
 import { cn } from "@/lib/utils";
-import Button from "@/Components/ui/Button";
-import Input from "@/Components/ui/Input";
+import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
 
 const settingsTabs = [
     { id: "store", name: "Store Details", icon: Store },

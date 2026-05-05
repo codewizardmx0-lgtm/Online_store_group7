@@ -11,7 +11,7 @@ import { formatCurrency } from "@/lib/utils";
 import { useStore } from "@/context/StoreContext";
 import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/context/ToastContext";
-import Button from "@/Components/ui/Button";
+import Button from "@/components/ui/Button";
 
 function ReturnModal({ order, onClose, onSubmit }) {
     const [reason, setReason] = useState("");
