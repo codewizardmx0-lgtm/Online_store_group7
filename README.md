@@ -1,110 +1,66 @@
-# Online_store_group7
-src/
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-المجلد الرئيسي الذي يحتوي كل كود المشروع.
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-docc/
+## About Laravel
 
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-مجلد خاص بالملفات
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-app/
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-مسؤول عن تشغيل التطبيق وإدارة التوجيه (Routing) والـ entry point.
+## Learning Laravel
 
-core/
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-طبقة النظام الأساسية التي تحتوي الإعدادات والخدمات العامة وإدارة الحالة والأدوات المشتركة.
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-shared/
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-مجلد المكونات والقوالب والأنماط المشتركة بين كل أجزاء المشروع.
+## Laravel Sponsors
 
-features/
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-كل ميزة في المشروع معزولة بالكامل (منتجات، سلة، دفع، حساب…).
+### Premium Partners
 
-assets/
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[WebReinvent](https://webreinvent.com/)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+- **[Jump24](https://jump24.co.uk)**
+- **[Redberry](https://redberry.international/laravel/)**
+- **[Active Logic](https://activelogic.com)**
+- **[byte5](https://byte5.de)**
+- **[OP.GG](https://op.gg)**
 
-ملفات ثابتة مثل الصور والأيقونات والخطوط.
+## Contributing
 
-tests/
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-اختبارات المشروع (وحدات، تكامل، اختبار شامل).
+## Code of Conduct
 
-# منصة التجارة الإلكترونية المرنة | Customizable E-Commerce Platform
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-![Project Status](https://img.shields.io/badge/Status-MVP_Development-blue)
-![Version](https://img.shields.io/badge/Version-1.0.0-green)
+## Security Vulnerabilities
 
-منصة تجارة إلكترونية ذكية وقابلة للتخصيص بالكامل. تهدف المنصة إلى حل مشكلة جمود الأنظمة الإلكترونية الجاهزة من خلال منح صاحب المتجر (البائع) القدرة المطلقة على تخصيص نشاطه التجاري وتشكيل هيكل التصنيفات وخصائص المنتجات (مثل اللون، المقاس، المواصفات) بشكل ديناميكي، دون الحاجة لكتابة سطر كود واحد أو إعادة هندسة النظام.
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## ✨ المميزات الرئيسية (Key Features)
+## License
 
-- **تخصيص ديناميكي مطلق (Dynamic Schema):** القدرة على إنشاء تصنيفات وخصائص غير محدودة وربطها بالمنتجات حسب نوع النشاط التجاري.
-- **إدارة ذكية للمخزون (Inventory Management):** تتبع لحظي دقيق للمخزون لكل "متغير" من المنتج لمنع عمليات البيع الوهمية.
-- **نظام التزامن والحجز (Locking System):** حجز المنتج مؤقتاً أثناء خطوة الدفع لمنع تعارض المستخدمين عند محاولة شراء آخر قطعة.
-- **رحلة تسوق سلسة:** فلاتر ديناميكية ذكية، سلة تسوق متطورة، نظام مفضلة، ومحاكاة آمنة لعملية الدفع.
-- **إدارة الكوبونات والطلبات:** لوحة تحكم متكاملة للبائع لمتابعة حالات الطلبات، وإصدار كوبونات الخصم بشروط مخصصة.
-- **التقييمات والاسترجاع:** نظام شفاف لتقييم المنتجات (للمشترين فقط) وآلية مرنة لتقديم ومتابعة طلبات الاسترجاع.
-
-## 🛠️ التقنيات المستخدمة (Tech Stack)
-
-تم اختيار التقنيات لضمان أعلى مستويات الأداء والمرونة:
-- **واجهة المستخدم (Frontend):** React.js / Vue.js (واجهة متجاوبة وسريعة).
-- **الخادم (Backend):** Node.js / Laravel (معالجة قوية وسريعة للطلبات).
-- **قاعدة البيانات (Database):** MongoDB (بيئة NoSQL لدعم معمارية الـ Dynamic Schema المطلوبة لتخصيص المنتجات).
-
-## 📚 التوثيق الشامل (Documentation)
-
-يحتوي هذا المستودع على توثيق شامل لكل أجزاء المشروع في قسم الـ **Wiki**. يُرجى زيارة [صفحة الـ Wiki](../../wiki) للاطلاع على:
-- [نطاق المشروع والمستخدمين (Scope & Users)](#)
-- [المتطلبات الوظيفية وغير الوظيفية (FR & NFR)](#)
-- [القرارات التقنية (Architecture Decisions)](#)
-- [مخططات التدفق والسيناريوهات البديلة (Flows & Scenarios)](#)
-- [معايير القبول (Acceptance Criteria)](#)
-
-*(ملاحظة: الروابط أعلاه تُوجه إلى صفحات الـ Wiki الداخلية للمستودع).*
-
-## 🚀 البدء السريع (Getting Started)
-
-لنسخ المشروع وتشغيله على بيئتك المحلية:
-
-1. **نسخ المستودع (Clone the repo):**
-   ```bash
-   git clone https://github.com/YourUsername/YourRepoName.git
-   cd YourRepoName
-   ```
-
-2. **تثبيت الاعتماديات (Install dependencies):**
-   ```bash
-   # للواجهة الأمامية
-   cd frontend
-   npm install
-
-   # للخادم
-   cd ../backend
-   npm install
-   ```
-
-3. **إعداد متغيرات البيئة (Environment Variables):**
-   - قم بنسخ ملف `.env.example` إلى `.env`
-   - أضف بيانات الاتصال بقاعدة البيانات (MongoDB URI) والمنافذ.
-
-4. **تشغيل المشروع (Run the application):**
-   ```bash
-   # تشغيل الخادم
-   npm run dev
-
-   # تشغيل الواجهة الأمامية
-   npm start
-   ```
-
-## 🤝 المساهمة (Contributing)
-
-نرحب بأي مساهمات لتحسين هذه المنصة! للمساهمة:
-1. قم بعمل Fork للمستودع.
-2. أنشئ فرعاً جديداً لميزتك (`git checkout -b feature/AmazingFeature`).
-3. احفظ التعديلات (`git commit -m 'Add some AmazingFeature'`).
-4. ارفع التعديلات إلى فرعك (`git push origin feature/AmazingFeature`).
-5. افتح Pull Request للمراجعة.
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
